@@ -1,1 +1,1 @@
-# Tensor-Flow-Image-Classifier
+Kenya Mobile Money - Python and SQL Practice Project.
