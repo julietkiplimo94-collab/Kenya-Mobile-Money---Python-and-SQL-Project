@@ -1,0 +1,5 @@
+kmbvenv/
+.ipynb_checkpoints/
+__pycache__/
+.env
+*.csv
