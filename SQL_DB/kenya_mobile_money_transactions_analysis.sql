@@ -121,7 +121,7 @@ select
 
 select * 
 from mobile_money_data.transactions t 
-limit 5;
+limit 5; 
 
 with customer_spend as (
 	select 
@@ -195,7 +195,26 @@ with t_bands as (
 --For every customer compute Recency (days since last transaction, relative to the dataset's max date), Frequency (number of transactions), and Monetary (total amount). Score each into quintiles (1–5) and label the top segment as "Champions". (Skills: multi-metric aggregation, quantile bucketing, NTILE().)
 
 	
-
+with max_date as
+			( select
+				max(t.transaction_timestamp) :: date as snap_shot
+				from transactions t
+				),
+	rfm_core as (
+			select 
+			t.customer_id,
+			(select snap_shot from max_date ) - max(t.transaction_timestamp):: date  as recency,
+			count(t.transaction_id) as frequency,
+			sum(t.amount_kes) as total_spend
+			from transcations t
+			group by t.customer_id
+			),
+			rfm_scores as (
+					select *,
+					NTILE(5) over (order by recency desc, t.customer_id),
+					NTILE(5) over (order by frequency asc, t.customer_id),
+					NTILE(5) over ( order by total_spend asc, t.customer_id),
+					
 
 
 
