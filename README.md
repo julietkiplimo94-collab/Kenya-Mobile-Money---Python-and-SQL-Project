@@ -1,9 +1,29 @@
-Kenya Mobile Money - Python and SQL Project.
-Project Overview
-This project gives you a synthetic Kenyan mobile-money transactions dataset (M-Pesa / Airtel Money / T-Kash / Equitel style) so you can practise real data-science and analytics skills with Python (pandas) and SQL.
 
-All data is randomly generated and fully synthetic - no real people, phone numbers, or accounts. The dataset is designed to be messy and realistic enough that the questions below require advanced techniques: window functions, cohort/retention analysis, time-series resampling, RFM segmentation, and more.
+## Capstone: Customer and Sales Intelligence
 
-Dataset: kenya_mobile_money_transactions.csv
+### Background
+A mobile-money transaction platform in Kenya processes payments across counties, channels, and agents, and earns revenue through transaction fees (KES). Management lacks a clear view of performance, customer value, activity peaks, and reliability.
 
-6,000 transactions across 800 customers, spanning 1 Jan 2024 → 31 Dec 2024.
+### Problem Statement
+How can transaction data be turned into actionable intelligence on revenue growth, customer value, operational reliability, and geographic concentration, so the business can decide which customers to retain, which counties to prioritise, and which channels to fix?
+
+### Objectives
+Ten questions, each solved twice (pandas and SQL) and compared. Only `status = 'Completed'` transactions are analysed unless stated otherwise.
+
+| Theme | Questions | Key techniques |
+|---|---|---|
+| Revenue and growth | Monthly fee revenue and MoM growth (Q1); fee efficiency by band (Q7) | `LAG()`, `pct_change()`, `CASE` / `pd.cut` |
+| Demand patterns | Day × hour heatmap (Q2); 7-day rolling volume (Q4) | Pivoting, resampling, rolling windows |
+| Customer value | Top 3 per county (Q3); RFM (Q5); inter-transaction gap (Q8); cohorts (Q9) | `RANK()`, `NTILE()`, `LAG()` |
+| Reliability | Failed/reversed rate by channel × type (Q6) | Conditional aggregation |
+| Concentration | County Pareto 80/20 (Q10) | Cumulative `SUM() OVER` |
+
+### Deliverables
+1. Jupyter notebook (.ipynb) with a pandas solution per question
+2. .sql file with one query per question
+3. 3-5 bullet insight write-up
+4. Bonus: charts for Q1, Q2, and Q10
+
+### Success Criteria
+- Python and SQL results match for every question
+- Insights lead to concrete recommendations (counties to target, channel to fix, peak-hour capacity)
